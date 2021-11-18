@@ -37,6 +37,15 @@
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
 
+			if (this.y <= 10) {
+				this.speed_y = -this.speed_y;
+				this.bounce_angle = -this.bounce_angle;
+			}
+			if (this.y >= 390) {
+				this.speed_y = -this.speed_y;
+				this.bounce_angle = -this.bounce_angle;
+			}
+
 		},
 		
 		get width(){
