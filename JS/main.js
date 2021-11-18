@@ -2,7 +2,6 @@
 	self.Board = function(width,height){
 		this.width = width;
 		this.height = height;
-		this.playing = false;
 		this.game_over = false;
 		this.bars = [];
 		this.ball = null;
@@ -37,7 +36,9 @@
 		move: function(){
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
+
 		},
+		
 		get width(){
 			return this.radius * 2;
 		},
@@ -66,7 +67,7 @@
 		this.board = board;
 		this.board.bars.push(this);
 		this.kind = "rectangle";
-		this.speed = 5;
+		this.speed = 10;
 	}
 
 	self.Bar.prototype = {
