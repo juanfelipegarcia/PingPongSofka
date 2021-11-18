@@ -1,3 +1,4 @@
+'use strict';
 (function(){
   self.Board = function(width, height){
     this.width = width;
@@ -11,7 +12,7 @@
   self.Board.prototype={
     get elements() {
       var elements = this.bars;
-      elements.push(this.ball);
+      //elements.push(this.ball);
       return elements;
     }
   }
@@ -52,23 +53,30 @@
   }
 
   self.BoardView.prototype = {
+    clean: function(){
+			this.ctx.clearRect(0,0,this.board.width,this.board.height);
+		},
     draw: function(){
       for (var i = this.board.elements.length - 1; i >= 0; i--){
         var el = this.board.elements[i];
 
         draw(this.ctx, el);
       };
+    },
+    play: function(){
+      board_view.draw();
+      //board_view.clean();
     }
   }
 
   function draw(ctx, element){
-    if (element !== null && element.hasOwnProperty("kind")) {
+    
       switch (element.kind) {
         case "rectangle":
           ctx.fillRect(element.x,element.y,element.width,element.height);
           break;
       }
-    }
+  
     
   }
 
@@ -76,26 +84,34 @@
 
   var board = new Board(800,400);
   var bar = new Bar(20,100,40,100,board);
-  var bar = new Bar(730,100,40,100,board);
+  var bar2 = new Bar(730,100,40,100,board);
   var canvas = document.getElementById("canvas");
   var board_view = new BoardView(canvas,board);
 
+
+
 document.addEventListener("keydown", function(ev){
- 
+ console.log(ev.keyCode);
+ ev.preventDefault();
   if (ev.keyCode == 38){
     bar.up();
   }else if(ev.keyCode == 40){
     bar.down();
+  }else if(ev.keyCode == 87){
+    bar2.up();
+  }else if(ev.keyCode == 83){
+    bar2.down();
   }
-  console.log(bar.toString());
+  console.log(""+bar);
+  console.log(""+bar2);
+
 });
 
-self.addEventListener("load",main);
-//window.addEventListener("load",main);
+window.requestAnimationFrame(controller);
 
-function main(){
+function controller(){
   
-  //console.log(board);
-  board_view.draw();
+  board_view.play();
+  window.requestAnimationFrame(controller);
 
 }
