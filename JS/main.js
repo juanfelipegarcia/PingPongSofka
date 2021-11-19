@@ -29,7 +29,7 @@
 		this.direction = -1;
 		this.bounce_angle = 0;
 		this.max_bounce_angle = Math.PI / 12;
-		this.speed = 5;
+		this.speed = 4;
 
 		board.ball = this;
 		this.kind = "circle";	
@@ -39,18 +39,18 @@
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
 
-			if (this.x <= 10) {
-				this.x = 400;
-				this.y = 200;
-				this.speed_x = -this.speed_x;
-				this.bounce_angle = -this.bounce_angle;
-			}
-			if (this.x >= 790) {
-				this.x = 400;
-				this.y = 200;
-				this.speed_x = -this.speed_x;
-				this.bounce_angle = -this.bounce_angle;
-			}
+			// if (this.x <= 10) {
+			// 	this.x = 400;
+			// 	this.y = 200;
+			// 	this.speed_x = -this.speed_x;
+			// 	this.bounce_angle = -this.bounce_angle;
+			// }
+			// if (this.x >= 790) {
+			// 	this.x = 400;
+			// 	this.y = 200;
+			// 	this.speed_x = -this.speed_x;
+			// 	this.bounce_angle = -this.bounce_angle;
+			// }
 
 			if (this.y <= 10) {
 				this.speed_y = -this.speed_y;
@@ -186,11 +186,11 @@
 })();
 
 var board = new Board(800,400);
-var bar = new Bar(0,100,15,100,board);
-var bar_2 = new Bar(785,100,15,100,board);
+var bar = new Bar(0,140,15,100,board);
+var bar_2 = new Bar(785,140,15,100,board);
 var canvas = document.getElementById('canvas');
 var board_view = new BoardView(canvas,board);
-var ball = new Ball(350, 100, 10,board);
+var ball = new Ball(400, 200, 10,board);
 
 document.addEventListener("keydown", function (ev) {
 	if (ev.keyCode == 38) {
