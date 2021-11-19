@@ -39,6 +39,7 @@
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
 
+
 			// if (this.x <= 10) {
 			// 	this.x = 400;
 			// 	this.y = 200;
@@ -193,6 +194,7 @@ var board_view = new BoardView(canvas,board);
 var ball = new Ball(400, 200, 10,board);
 
 document.addEventListener("keydown", function (ev) {
+console.log(ev.keyCode);
 	if (ev.keyCode == 38) {
 		ev.preventDefault();
 		if (bar_2.y >= 10) {
@@ -205,15 +207,15 @@ document.addEventListener("keydown", function (ev) {
 			bar_2.down(); 
 		}
 	}
-	else if (ev.keyCode == 87) {
-		//Tecla W
+	else if (ev.keyCode == 65) {
+		//Tecla A
 		ev.preventDefault();
 		if (bar.y >= 10) {
 			bar.up(); 
 		}
 	}
-	else if (ev.keyCode == 83) {
-		//tecla S
+	else if (ev.keyCode == 90) {
+		//tecla Z
 		ev.preventDefault();
 		if (bar.y <= 290) {
 			bar.down(); 

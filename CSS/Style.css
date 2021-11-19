@@ -1,10 +1,12 @@
 body{
   background-color :aqua;
-  text-align :center;
+  
   background-image: url("/IMG/pong2.jpg");
+  background-size: cover no-repeat;
 }
 
 canvas{
+  
   border:solid;
   border-color: rgb(7, 7, 7);
   background-color: green;
@@ -17,6 +19,15 @@ h1{
   background-color: rgba(0, 0, 0, 0.301);
   
 }
+
+.instruciones{
+  color:white;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.301);
+}
+
+
+
 
  .boton_1{
   text-decoration: none;
