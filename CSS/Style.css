@@ -18,7 +18,7 @@ h1{
   
 }
 
-.boton_1{
+ .boton_1{
   text-decoration: none;
   padding: 3px;
   padding-left: 10px;
@@ -35,5 +35,5 @@ h1{
 .boton_1:hover{
   opacity: 0.6;
   text-decoration: none;
-}
+} 
 

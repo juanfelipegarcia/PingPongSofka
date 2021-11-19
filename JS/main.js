@@ -16,6 +16,8 @@
 		}
 	}
 })();
+
+//Crea la bola
 (function(){
 	self.Ball = function(x,y,radius,board){
 		this.x = x;
@@ -27,7 +29,7 @@
 		this.direction = -1;
 		this.bounce_angle = 0;
 		this.max_bounce_angle = Math.PI / 12;
-		this.speed = 3;
+		this.speed = 5;
 
 		board.ball = this;
 		this.kind = "circle";	
@@ -37,6 +39,19 @@
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
 
+			if (this.x <= 10) {
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
+			if (this.x >= 790) {
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
+
 			if (this.y <= 10) {
 				this.speed_y = -this.speed_y;
 				this.bounce_angle = -this.bounce_angle;
@@ -45,7 +60,6 @@
 				this.speed_y = -this.speed_y;
 				this.bounce_angle = -this.bounce_angle;
 			}
-
 		},
 		
 		get width(){
@@ -67,6 +81,8 @@
 		}
 	}
 })();
+
+
 (function(){
 	self.Bar = function(x,y,width,height,board){
 		this.x = x;
@@ -78,7 +94,6 @@
 		this.kind = "rectangle";
 		this.speed = 10;
 	}
-
 	self.Bar.prototype = {
 		down: function(){
 			this.y += this.speed;
@@ -92,6 +107,7 @@
 	}
 })();
 
+
 (function(){
 	self.BoardView = function(canvas,board){
 		this.canvas = canvas;
@@ -99,6 +115,7 @@
 		this.canvas.height = board.height;
 		this.board = board;
 		this.ctx = canvas.getContext("2d");
+
 	}
 
 	self.BoardView.prototype = {
@@ -108,6 +125,8 @@
 		draw: function(){
 			for (var i = this.board.elements.length - 1; i >= 0; i--) {
 				var el = this.board.elements[i];
+
+
 				draw(this.ctx,el);
 			};
 		},
@@ -167,29 +186,39 @@
 })();
 
 var board = new Board(800,400);
-var bar = new Bar(20,100,40,100,board);
-var bar_2 = new Bar(735,100,40,100,board);
+var bar = new Bar(0,100,15,100,board);
+var bar_2 = new Bar(785,100,15,100,board);
 var canvas = document.getElementById('canvas');
 var board_view = new BoardView(canvas,board);
 var ball = new Ball(350, 100, 10,board);
 
-document.addEventListener("keydown",function(ev){
-	if(ev.keyCode == 38){
+document.addEventListener("keydown", function (ev) {
+	if (ev.keyCode == 38) {
 		ev.preventDefault();
-		bar.up();
+		if (bar_2.y >= 10) {
+			bar_2.up(); 
+		}
 	}
-	else if(ev.keyCode == 40){
+	else if (ev.keyCode == 40) {
 		ev.preventDefault();
-		bar.down();
-	}else if(ev.keyCode === 87){
+		if (bar_2.y <= 290) {
+			bar_2.down(); 
+		}
+	}
+	else if (ev.keyCode == 87) {
+		//Tecla W
 		ev.preventDefault();
-		// tecla W
-		bar_2.up();
-	}else if(ev.keyCode === 83){
+		if (bar.y >= 10) {
+			bar.up(); 
+		}
+	}
+	else if (ev.keyCode == 83) {
+		//tecla S
 		ev.preventDefault();
-		// tecla S
-		bar_2.down();
-	}else if(ev.keyCode === 32){
+		if (bar.y <= 290) {
+			bar.down(); 
+		}
+	} else if (ev.keyCode == 32) {
 		ev.preventDefault();
 		board.playing = !board.playing;
 	}
