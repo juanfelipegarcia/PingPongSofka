@@ -1,7 +1,26 @@
 var jugador1 = document.getElementById("jugador-1");
 var jugador2 = document.getElementById("jugador-2");
+var canidad = document.getElementById("cantidad");
 
 var puntosLimite = parseInt(prompt("Digita el numero de puntos que  quieres disputar", "1"));
+
+while (puntosLimite == null || /\D/.test(puntosLimite) || puntosLimite == "") {
+	puntosLimite = prompt("Entre un número VÁLIDO entre 1 y 10: ");
+};
+
+if (puntosLimite > 10 || puntosLimite < 0) {
+	alert("Debes ingresar una tantidad de intentos entre 1 y 10");
+	location.reload();
+}else if(puntosLimite.length = 0){
+	alert("Debes ingresar una tantidad de intentos entre 1 y 10");
+	location.reload();
+}else if (puntosLimite === null){
+	alert("no puede ser un valor vacio");
+	location.reload();
+}
+
+cantidad.innerHTML= `Ping Pong!.. Puntos a disputar: ${puntosLimite}`;
+
 
 var puntaje1 = 0;
 var puntaje2 = 0;
