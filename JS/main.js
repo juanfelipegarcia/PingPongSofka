@@ -1,3 +1,36 @@
+var jugador1 = document.getElementById("jugador-1");
+var jugador2 = document.getElementById("jugador-2");
+
+var puntosLimite = parseInt(prompt("Digita el numero de puntos que  quieres disputar", "1"));
+
+var puntaje1 = 0;
+var puntaje2 = 0;
+
+function marcador(jugador){
+	if (jugador == 1) {
+		puntaje2++;
+		jugador2.innerHTML = puntaje2;
+	} else {
+		
+		puntaje1++;
+		jugador1.innerHTML = puntaje1;
+	}
+}
+
+function ganador(jugador){
+	if (jugador == 1) {
+		alert('Gamador jugador 1!!!!!!!')
+		puntaje1 = 0;
+		location.reload();
+	} else {
+		alert('Gamador jugador 2!!!!!!!')
+		puntaje2 = 0;
+		location.reload();
+	}
+
+}
+
+
 (function(){
 	self.Board = function(width,height){
 		this.width = width;
@@ -39,25 +72,34 @@
 			this.x += (this.speed_x * this.direction);
 			this.y += (this.speed_y);
 
+			if (puntaje1 == puntosLimite) {ganador(1);}
+			else if (puntaje2 == puntosLimite) {ganador(2);}
 
-			// if (this.x <= 10) {
-			// 	this.x = 400;
-			// 	this.y = 200;
-			// 	this.speed_x = -this.speed_x;
-			// 	this.bounce_angle = -this.bounce_angle;
-			// }
-			// if (this.x >= 790) {
-			// 	this.x = 400;
-			// 	this.y = 200;
-			// 	this.speed_x = -this.speed_x;
-			// 	this.bounce_angle = -this.bounce_angle;
-			// }
+
+			if (this.x <= 10) {
+				console.log("llego1");
+				marcador(1);
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
+			if (this.x >= 790) {
+				console.log("llego2");
+				marcador(2);
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
 
 			if (this.y <= 10) {
+				
 				this.speed_y = -this.speed_y;
 				this.bounce_angle = -this.bounce_angle;
 			}
 			if (this.y >= 390) {
+				
 				this.speed_y = -this.speed_y;
 				this.bounce_angle = -this.bounce_angle;
 			}
@@ -73,7 +115,7 @@
 			var relative_intersect_y = ( bar.y + (bar.height / 2) ) - this.y;
 			var normalized_intersect_y = relative_intersect_y / (bar.height / 2);
 			this.bounce_angle = normalized_intersect_y * this.max_bounce_angle;
-			console.log(this.bounce_angle);
+			
 			this.speed_y = this.speed * -Math.sin(this.bounce_angle);
 			this.speed_x = this.speed * Math.cos(this.bounce_angle);
 
@@ -194,7 +236,7 @@ var board_view = new BoardView(canvas,board);
 var ball = new Ball(400, 200, 10,board);
 
 document.addEventListener("keydown", function (ev) {
-console.log(ev.keyCode);
+
 	if (ev.keyCode == 38) {
 		ev.preventDefault();
 		if (bar_2.y >= 10) {
